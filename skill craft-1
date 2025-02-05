@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation Menu</title>
+    <style>
+        body {
+            margin: 0; /* Remove default body margin */
+            font-family: sans-serif;
+            /* Add some content to make scrolling possible */
+            height: 200vh; /* Example: 200% viewport height */
+            padding-top: 60px; /* Adjust for the navbar height */
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0; /* Initial background color */
+            padding: 10px;
+            z-index: 100; /* Ensure it's on top */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center; /* Center the menu items */
+        }
+
+        nav li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333; /* Initial text color */
+            padding: 5px 10px;
+            transition: color 0.3s ease; /* Smooth transition */
+        }
+
+        nav a:hover {
+            color: #007bff; /* Hover text color */
+        }
+
+        /* Style changes on scroll */
+        .scrolled {
+            background-color: #fff; /* Background color on scroll */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        .scrolled a {
+            color: #333; /* Text color on scroll */
+        }
+
+        /* Active/Current Page Styling (You'll need to add logic to set this) */
+        .active { /* or a class added dynamically with JS */
+            color: #007bff;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 0) { // Adjust scroll threshold as needed
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+
+        // Optional: Add JavaScript for dynamically setting the active class
+        // (This is a simplified example; you'd likely use server-side logic or
+        // a JavaScript framework for a real application)
+
+        const navLinks = document.querySelectorAll('#mainNav a');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // Prevent default link behavior (for demo purposes)
+                event.preventDefault();
+
+                // Remove active class from all links
+                navLinks.forEach(otherLink => otherLink.classList.remove('active'));
+
+                // Add active class to the clicked link
+                this.classList.add('active');
+
+                // In a real app, you would handle page navigation here
+                console.log("Navigating to:", this.textContent);
+            });
+        });
+
+    </script>
+
+</body>
+</html>
